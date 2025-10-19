@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio</title>
+    <link rel="icon" type="" href="asset/logoimage.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#1E40AF',
+                        dark: '#1F2937',
+                        light: '#F9FAFB',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.9), rgba(59, 130, 246, 0.9), rgba(147, 51, 234, 0.8)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero h1 {
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero p {
+            animation: slideUp 1s ease-out 0.3s both;
+        }
+
+        .hero .flex {
+            animation: slideUp 1s ease-out 0.6s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .skill-bar {
+            transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(90deg, #3B82F6, #8B5CF6);
+        }
+
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .glass-card {
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modern-button {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .modern-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #3B82F6, #8B5CF6);
+            border-radius: 2px;
+        }
+
+        #menu-toggle:checked ~ #mobile-menu {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .social-icon {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .contact-form input, .contact-form textarea {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+            border-color: #3B82F6;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+</head>
+<body class="bg-light text-dark">
+    <!-- Navbar -->
+    <nav class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-primary">eR-Ha</a> 
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-10">
+                <a href="#home" class="hover:text-primary transition">Home</a>
+                <a href="#about" class="hover:text-primary transition">Tentang</a>
+                <a href="#projects" class="hover:text-primary transition">Proyek</a>
+                <a href="#skills" class="hover:text-primary transition">Keterampilan</a>
+                <a href="#contact" class="hover:text-primary transition">Kontak</a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-dark focus:outline-none" aria-label="Toggle mobile menu" title="Toggle mobile menu">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white px-6 pt-2 pb-4">
+            <a href="#home" class="block py-2 hover:text-primary transition">Home</a>
+            <a href="#about" class="block py-2 hover:text-primary transition">Tentang</a>
+            <a href="#projects" class="block py-2 hover:text-primary transition">Proyek</a>
+            <a href="#skills" class="block py-2 hover:text-primary transition">Keterampilan</a>
+            <a href="#contact" class="block py-2 hover:text-primary transition">Kontak</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero min-h-screen flex items-center pt-16">
+        <div class="container mx-auto px-6 text-center text-white">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Hai, Saya <span class="text-yellow-300">Riko Hermawan</span></h1>
+            <p class="text-xl md:text-2xl mb-8">Web Developer & UI/UX Designer</p>
+            <div class="flex justify-center space-x-4">
+                <a href="#projects" class="bg-blue-400 hover:bg-secondary px-6 py-3 rounded-lg font-semibold transition">Lihat Proyek</a>
+                <a href="#contact" class="bg-transparent border-2 border-white hover:bg-white hover:text-primary px-6 py-3 rounded-lg font-semibold transition">Hubungi Saya</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-16">Tentang <span class="text-primary">Saya</span></h2>
+            
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-10 md:mb-0 flex justify-center">
+                    <div class="rounded-full overflow-hidden border-4 border-primary w-64 h-64">
+                        <img src="asset/Djawatan.jpg"
+                             alt="Profile" class="w-full h-full object-cover object-center">
+                    </div>
+                </div>
+                
+                <div class="md:w-2/3 md:pl-12">
+                    <h3 class="text-2xl font-semibold mb-4">Web Developer Kreatif</h3>
+                    <p class="text-lg mb-6">
+                        Saya adalah seorang web developer dengan passion dalam menciptakan pengalaman digital yang menarik dan fungsional. 
+                        Dengan lebih dari 3 tahun pengalaman, saya telah mengembangkan berbagai proyek dari website perusahaan hingga aplikasi web yang kompleks.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <p><span class="font-semibold">Nama:</span> Riko Hermawan </p>
+                            <p><span class="font-semibold">Email:</span> rikohrmawan258@gmail.com</p>
+                        </div>
+                        <div>
+                            <p><span class="font-semibold">Umur:</span> 21 Tahun</p>
+                            <p><span class="font-semibold">Lokasi:</span> Situbondo, Indonesia</p>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="bg-primary hover:bg-secondary text-white px-6 py-3 rounded-lg font-semibold transition">
+                        Download CV
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-4">Proyek <span class="text-primary">Saya</span></h2>
+            <p class="text-center text-lg mb-16">Beberapa proyek terbaru yang telah saya kerjakan</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg">
+                    <img src="asset/Portofolio.png"
+                         alt="Project 1" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Portofolio Pribadi</h3>
+                        <p class="text-gray-600 mb-4">Website responsif untuk perusahaan dengan fitur e-commerce terintegrasi.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">HTML</span>
+                            <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">CSS</span>
+                            <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">JavaScript</span>
+                        </div>
+                        <a href="#" class="text-primary font-semibold hover:underline">Lihat Proyek →</a>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg">
+                    <img src="asset/PonpesDelima.png" 
+                         alt="Project 2" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Pendaftaran Santri Baru</h3>
+                        <p class="text-gray-600 mb-4">Aplikasi mobile untuk manajemen tugas dengan fitur kolaborasi tim.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">Tailwind CSS</span>
+                            <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">React</span>
+                            <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">Node.js</span>
+                        </div>
+                        <a href="#" class="text-primary font-semibold hover:underline">Lihat Proyek →</a>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card bg-white rounded-lg overflow-hidden shadow-lg">
+                    <img src="asset/MuawanahStore.png" 
+                         alt="Project 3" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">e-commerce</h3>
+                        <p class="text-gray-600 mb-4">Dashboard untuk visualisasi data dengan berbagai chart dan grafik interaktif.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">Tailwind CSS</span>
+                            <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">React.js</span>
+                            <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">Node.js</span>
+                        </div>
+                        <a href="#" class="text-primary font-semibold hover:underline">Lihat Proyek →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-4">Keterampilan <span class="text-primary">Saya</span></h2>
+            <p class="text-center text-lg mb-16">Teknologi dan tools yang saya kuasai</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Technical Skills -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-6">Teknis</h3>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>HTML/CSS</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-bar bg-primary h-2.5 rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>JavaScript</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-bar bg-primary h-2.5 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>React</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-bar bg-primary h-2.5 rounded-full" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>UI/UX Design</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-bar bg-primary h-2.5 rounded-full" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Professional Skills -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-6">Profesional</h3>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>Komunikasi</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-bar bg-primary h-2.5 rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>Kerja Tim</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-bar bg-primary h-2.5 rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>Manajemen Proyek</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-bar bg-primary h-2.5 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span>Problem Solving</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div class="skill-bar bg-primary h-2.5 rounded-full" style="width: 88%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-4">Hubungi <span class="text-primary">Saya</span></h2>
+            <p class="text-center text-lg mb-16">Silakan hubungi saya untuk diskusi proyek atau kolaborasi</p>
+            
+            <div class="flex flex-col md:flex-row gap-10">
+                <div class="md:w-1/2">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block mb-2 font-medium">Nama Lengkap</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border focus:border-primary focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label for="email" class="block mb-2 font-medium">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border focus:border-primary focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label for="message" class="block mb-2 font-medium">Pesan</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 rounded-lg border focus:border-primary focus:outline-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="bg-primary hover:bg-secondary text-white px-6 py-3 rounded-lg font-semibold transition w-full">
+                            Kirim Pesan
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-semibold mb-6">Informasi Kontak</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-primary mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Lokasi</h4>
+                                    <p class="text-gray-600">Tanjung Geger Barat, Tanjung Pecinan, Mangaran - Situbondo</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-envelope text-primary mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Email</h4>
+                                    <p class="text-gray-600">rikohrmawan258@gmail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-phone-alt text-primary mt-1 mr-4"></i>
+                                <div>
+                                    <h4 class="font-semibold">Telepon</h4>
+                                    <p class="text-gray-600">+62 857 0608 3653</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-semibold mb-4">Ikuti Saya</h4>
+                            <div class="flex space-x-4">
+                                <a href="https://www.linkedin.com/in/riko-hermawan-742a81328/" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition" aria-label="LinkedIn" title="LinkedIn">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://github.com/rikchooo" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition" aria-label="GitHub" title="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://www.instagram.com/rk.hrmwn_/" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition" aria-label="Instagram" title="Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://x.com/rikohrmawan258" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary transition" aria-label="Twitter" title="Twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>© 2025 All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize EmailJS
+        (function(){
+            emailjs.init("RjltcuH4gx5zc_9Lc"); // Ganti dengan EmailJS public key Anda
+        })();
+
+        // Mobile menu toggle
+        document.getElementById('menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animate skill bars on scroll
+        function animateSkillBars() {
+            const skillBars = document.querySelectorAll('.skill-bar');
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+        }
+
+        // Use Intersection Observer to trigger animation when skills section is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateSkillBars();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const skillsSection = document.getElementById('skills');
+        if (skillsSection) {
+            observer.observe(skillsSection);
+        }
+
+        // Form validation and submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const submitBtn = document.querySelector('button[type="submit"]');
+
+            // Clear previous error messages
+            clearErrors();
+
+            // Validate form
+            let isValid = true;
+            if (!name) {
+                showError('name', 'Nama lengkap wajib diisi');
+                isValid = false;
+            }
+            if (!email) {
+                showError('email', 'Email wajib diisi');
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                showError('email', 'Format email tidak valid');
+                isValid = false;
+            }
+            if (!message) {
+                showError('message', 'Pesan wajib diisi');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Disable submit button and show loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Mengirim...';
+
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                message: message,
+                to_email: 'rikohrmawan258@gmail.com'
+            };
+
+            emailjs.send('service_vh9wf8p', 'template_n9vz4v6', templateParams)
+                .then(function(response) {
+                    showSuccess('Pesan berhasil dikirim! Terima kasih atas pesan Anda.');
+                    document.getElementById('contact-form').reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Kirim Pesan';
+                }, function(error) {
+                    showFormError('Gagal mengirim pesan. Silakan coba lagi atau hubungi langsung.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Kirim Pesan';
+                    console.error('EmailJS error:', error);
+                });
+        });
+
+        function showError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'text-red-500 text-sm mt-1 error-message';
+            errorDiv.textContent = message;
+            field.parentNode.appendChild(errorDiv);
+            field.classList.add('border-red-500');
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.createElement('div');
+            successDiv.className = 'text-green-500 text-sm mt-4 success-message';
+            successDiv.textContent = message;
+            const form = document.getElementById('contact-form');
+            form.appendChild(successDiv);
+            setTimeout(() => {
+                successDiv.remove();
+            }, 5000);
+        }
+
+        function showFormError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'text-red-500 text-sm mt-4 error-message';
+            errorDiv.textContent = message;
+            const form = document.getElementById('contact-form');
+            form.appendChild(errorDiv);
+            setTimeout(() => {
+                errorDiv.remove();
+            }, 5000);
+        }
+
+        function clearErrors() {
+            document.querySelectorAll('.error-message').forEach(el => el.remove());
+            document.querySelectorAll('.success-message').forEach(el => el.remove());
+            document.querySelectorAll('input, textarea').forEach(el => el.classList.remove('border-red-500'));
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+    </script>
+</body>
+</html>
